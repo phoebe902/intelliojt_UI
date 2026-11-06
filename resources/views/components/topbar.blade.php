@@ -11,6 +11,9 @@
 
     {{-- Right side --}}
     <div class="flex items-center gap-6">
+        
+
+            @csrf
 
         <a href="#" class="text-sm text-slate-500 hover:text-slate-800">Help &amp; support</a>
 
