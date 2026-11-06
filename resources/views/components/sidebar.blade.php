@@ -55,6 +55,7 @@
 
         if (in_array($role, [\App\Enums\UserRole::Coordinator], true)) {
             $sections['Coordinator'] = [
+                 ['label' => 'Overview',  'route' => 'dashboard',       'icon' => 'overview'],
                 ['label' => 'Placements',   'route' => 'placements.index',   'icon' => 'companies', 'badge' => \App\Models\Student::whereNull('company_id')->count() ?: null],
                 ['label' => 'Requirements', 'route' => 'requirements.index', 'icon' => 'document',  'badge' => \App\Models\RequirementSubmission::where('status', 'submitted')->count() ?: null],
                 ['label' => 'Monitoring',   'route' => 'monitoring.index',   'icon' => 'eye'],
