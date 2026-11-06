@@ -32,25 +32,17 @@
                 </div>
             </div>
 
-            <span class="rounded-lg border border-white/15 bg-white/5 px-3.5 py-2 text-[10px] font-semibold uppercase tracking-wider text-blue-100">
-                {{ \App\Models\Setting::get('program_name', 'UNM OJT Program') }}
-                <p>&copy; {{ date('Y') }} {{ \App\Models\Setting::get('institution', 'University of Northwestern Mindanao') }}. All rights reserved.</p>
 
-            </span>
         </div>
 
         {{-- Headline + features + preview --}}
         <div class="flex flex-1 flex-col justify-center gap-9 py-10">
             <div>
-                <p class="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-300">
-                    <span class="h-px w-8 bg-teal-300"></span>Intelligent internship management
-                </p>
+                
                 <h2 class="mt-6 max-w-lg text-[56px] font-semibold leading-[1.08] tracking-tight">
                     Turn every OJT journey into a success story.
                 </h2>
-                <p class="mt-6 max-w-lg text-[15px] leading-relaxed text-blue-100/80">
-                    Join a connected platform that brings students, coordinators, and industry partners together through timely insights and meaningful support.
-                </p>
+            
             </div>
 
             <ul class="grid max-w-xl grid-cols-3 gap-6">
