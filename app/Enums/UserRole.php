@@ -13,12 +13,12 @@ enum UserRole: string
     public function label(): string
     {
         return match ($this) {
-            self::Administrator     => 'Administrator',
-            self::Coordinator       => 'OJT Coordinator',
-            self::FacultySupervisor => 'Faculty Supervisor',
-            self::Student           => 'Student / Intern',
-            self::CompanySupervisor => 'Company Supervisor',
-        };
+        self::Administrator     => 'admin.users.index',
+        self::Coordinator       => 'coordinator.students.index',
+        self::FacultySupervisor => 'faculty.students.index',
+        self::Student           => 'student.progress',
+        self::CompanySupervisor => 'supervisor.attendance.index',
+    };
     }
 
     public function description(): string

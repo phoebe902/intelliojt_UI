@@ -12,11 +12,7 @@
     {{-- Right side --}}
     <div class="flex items-center gap-6">
         
-         <form action="{{ route('logout') }}" method="POST">
-            @csrf
-           <button class="flex w-full items-center justify-center rounded-xl bg-red-600 px-4 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/30" type=submit>Logout
-            </button>
-        </form>
+         
         <a href="#" class="text-sm text-slate-500 hover:text-slate-800">Help &amp; support</a>
 
         <button type="button" class="relative text-slate-500 hover:text-slate-800" aria-label="Notifications">
