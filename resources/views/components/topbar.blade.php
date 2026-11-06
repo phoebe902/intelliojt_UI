@@ -12,9 +12,7 @@
     {{-- Right side --}}
     <div class="flex items-center gap-6">
         
-
-            @csrf
-
+         
         <a href="#" class="text-sm text-slate-500 hover:text-slate-800">Help &amp; support</a>
 
         <button type="button" class="relative text-slate-500 hover:text-slate-800" aria-label="Notifications">
@@ -33,7 +31,7 @@
     <div x-cloak x-show="open" x-transition.opacity @click.outside="open = false"
          class="absolute right-0 z-20 mt-2 w-60 rounded-xl border border-slate-200 bg-white py-2 shadow-lg">
         <div class="border-b border-slate-100 px-4 pb-3">
-            <p class="text-sm font-semibold text-slate-800">{{ auth()->user()?->full_name ?? 'Guest' }}</p>
+            <p class="text-sm font-semibold text-slate-800">{{ auth()->user()?->full_name ?? 'Profile' }}</p>
             <p class="text-xs text-slate-400">{{ auth()->user()?->role?->label() ?? 'Not signed in' }}</p>
         </div>
         <form method="POST" action="{{ route('logout') }}">
