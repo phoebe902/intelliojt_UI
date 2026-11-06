@@ -23,6 +23,7 @@
         // Students (interns) only see their own tabs
         $sections = [
             'Intern' => [
+                ['label' => 'Overview',  'route' => 'dashboard',       'icon' => 'overview'],
                 ['label' => 'Requirements',  'route' => 'student.requirements.index',  'icon' => 'document'],
                 ['label' => 'Attendance',    'route' => 'student.attendance.index',    'icon' => 'clock'],
                 ['label' => 'My progress',   'route' => 'student.progress.index',      'icon' => 'analytics'],
@@ -33,6 +34,7 @@
         // Company supervisors only verify attendance and evaluate interns
         $sections = [
             'CompanySupervisor' => [
+                ['label' => 'Overview',  'route' => 'dashboard',       'icon' => 'overview'],
                 ['label' => 'Verify attendance', 'route' => 'supervisor.attendance.index',  'icon' => 'clock'],
                 ['label' => 'Evaluate interns',  'route' => 'supervisor.evaluations.index', 'icon' => 'evaluations'],
             ],
