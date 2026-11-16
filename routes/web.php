@@ -80,7 +80,7 @@ Route::middleware(['auth', 'role:administrator'])->group(function () {
     Route::put('companies/{company}', [CompanyController::class, 'update'])->name('companies.update');
     Route::delete('companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy');
 });
-Route::middleware(['auth', 'role:coordinator,administrator'])->group(function () {
+Route::middleware(['auth', 'role:coordinator,administrator,faculty_supervisor'])->group(function () {
     Route::get('requirements', [RequirementController::class, 'index'])->name('requirements.index');
     Route::get('placements', [PlacementController::class, 'index'])->name('placements.index');
     Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');
@@ -102,3 +102,16 @@ Route::middleware(['auth', 'role:student'])
         Route::get('/attendance',  [SupervisorAttendanceController::class, 'index'])->name('attendance.index');
         Route::get('/evaluations', [SupervisorEvaluationController::class, 'index'])->name('evaluations.index');
     });
+
+    Route::middleware(['auth'])->group(function () {
+
+    Route::get('/coordinator/monitoring/index', [MonitoringController::class, 'index'])
+        ->name('coordinator.monitoring.index');
+
+    Route::get('/student/attendance/index', [StudentController::class, 'index'])
+        ->name('student.attendance.index');
+
+    Route::get('supervisor/attendance/index', [CompanyController::class, 'index'])
+        ->name('supervisor.attendance.index');
+
+});

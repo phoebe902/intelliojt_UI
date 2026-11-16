@@ -18,6 +18,8 @@
     $role      = auth()->user()?->role;
     $isStudent    = $role === \App\Enums\UserRole::Student;
     $isCompanySupervisor = $role === \App\Enums\UserRole::CompanySupervisor;
+    $isCoordinator = $role === \App\Enums\UserRole::Coordinator;
+    $isFacultySupervisor = $role === \App\Enums\UserRole::FacultySupervisor;
 
     if ($isStudent) {
         // Students (interns) only see their own tabs
@@ -33,10 +35,25 @@
     } elseif ($isCompanySupervisor) {
         // Company supervisors only verify attendance and evaluate interns
         $sections = [
-            'CompanySupervisor' => [
+            'Company Supervisor' => [
                 ['label' => 'Overview',  'route' => 'dashboard',       'icon' => 'overview'],
                 ['label' => 'Verify attendance', 'route' => 'supervisor.attendance.index',  'icon' => 'clock'],
                 ['label' => 'Evaluate interns',  'route' => 'supervisor.evaluations.index', 'icon' => 'evaluations'],
+            ],
+        ];
+    }
+    elseif ($isFacultySupervisor) {
+        // Company supervisors only verify attendance and evaluate interns
+        $sections = [
+            'Faculty Supervisor' => [
+                 ['label' => 'Overview',  'route' => 'dashboard',       'icon' => 'overview'],
+                ['label' => 'Students',  'route' => 'students.index',  'icon' => 'students'],
+                ['label' => 'Companies', 'route' => 'companies.index', 'icon' => 'companies'],
+            
+                ['label' => 'Placements',   'route' => 'placements.index',   'icon' => 'companies', 'badge' => \App\Models\Student::whereNull('company_id')->count() ?: null],
+                ['label' => 'Requirements', 'route' => 'requirements.index', 'icon' => 'document',  'badge' => \App\Models\RequirementSubmission::where('status', 'submitted')->count() ?: null],
+                ['label' => 'Monitoring',   'route' => 'monitoring.index',   'icon' => 'eye'],
+                ['label' => 'Reports',      'route' => 'reports.index',      'icon' => 'analytics'],
             ],
         ];
     } else {
@@ -45,21 +62,21 @@
                 ['label' => 'Overview',  'route' => 'dashboard',       'icon' => 'overview'],
                 ['label' => 'Students',  'route' => 'students.index',  'icon' => 'students'],
                 ['label' => 'Companies', 'route' => 'companies.index', 'icon' => 'companies'],
-                ['label' => 'Analytics', 'route' => 'analytics.index', 'icon' => 'analytics'],
+              
             ],
-            'Manage' => [
-                ['label' => 'Evaluations', 'route' => 'evaluations.index', 'icon' => 'evaluations', 'badge' => \App\Models\Evaluation::awaitingReview()->count()],
-                ['label' => 'Schedule',    'route' => 'schedule.index',     'icon' => 'schedule'],
-            ],
+            
         ];
 
         if (in_array($role, [\App\Enums\UserRole::Coordinator], true)) {
             $sections['Coordinator'] = [
-                 ['label' => 'Overview',  'route' => 'dashboard',       'icon' => 'overview'],
+            
                 ['label' => 'Placements',   'route' => 'placements.index',   'icon' => 'companies', 'badge' => \App\Models\Student::whereNull('company_id')->count() ?: null],
                 ['label' => 'Requirements', 'route' => 'requirements.index', 'icon' => 'document',  'badge' => \App\Models\RequirementSubmission::where('status', 'submitted')->count() ?: null],
                 ['label' => 'Monitoring',   'route' => 'monitoring.index',   'icon' => 'eye'],
                 ['label' => 'Reports',      'route' => 'reports.index',      'icon' => 'analytics'],
+                 ['label' => 'Evaluations', 'route' => 'evaluations.index', 'icon' => 'evaluations', 'badge' => \App\Models\Evaluation::awaitingReview()->count()],
+                ['label' => 'Schedule',    'route' => 'schedule.index',     'icon' => 'schedule'],
+                  ['label' => 'Analytics', 'route' => 'analytics.index', 'icon' => 'analytics'],
             ];
         }
 
@@ -148,13 +165,22 @@
                 Verify now
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
             </a>
-        @else
+            @elseif ($isCoordinator)
             <p class="font-semibold text-slate-900">Predictive insight</p>
             <p class="mt-1 text-sm text-slate-500">3 students need early intervention this week.</p>
             <a href="#" class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-blue-700 hover:text-blue-800">
                 View analysis
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
             </a>
+            @elseif ($isFacultySupervisor)
+            <p class="font-semibold text-slate-900">Predictive insight</p>
+            <p class="mt-1 text-sm text-slate-500">3 students need early intervention this week.</p>
+            <a href="#" class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-blue-700 hover:text-blue-800">
+                View analysis
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </a>
+        @else
+            
         @endif
     </div>
 </aside>
